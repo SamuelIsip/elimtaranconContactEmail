@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class EmailController {
 	 * @param elimUser
 	 * @return
 	 */
+	@CrossOrigin(origins = {"https://elimtarancon.es/", "https://www.elimtarancon.es/"})
 	@PostMapping("/sendEmail")
 	public ResponseEntity<String> sendEmail(@Valid @RequestBody ElimUser elimUser) {
 		
