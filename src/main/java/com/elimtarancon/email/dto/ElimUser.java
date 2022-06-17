@@ -27,7 +27,7 @@ public class ElimUser {
 	@NotNull
 	@JsonProperty("email")
 	private String email;
-	@Size(min = 5, max = 160)
+	@Size(min = 5, max = 260)
 	@NotNull
 	@JsonProperty("message")
 	private String message;
