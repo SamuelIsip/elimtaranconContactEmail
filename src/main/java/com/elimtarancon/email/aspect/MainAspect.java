@@ -28,11 +28,6 @@ public class MainAspect {
 		// Only for logging propose
 	}
 
-	@Pointcut("execution(* com.elimtarancon.email.services.EmailServiceImpl.responseSanityCheck(..))")
-	private void forServiceMatchReCaptcha() {
-		// Only for logging propose
-	}
-
 	@Around("forControllerPackage()")
 	public Object timestampSendEmail(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
@@ -50,7 +45,7 @@ public class MainAspect {
 			throw ex;
 		}
 
-		logger.log(Level.INFO, "Email was sent in: {} miliseconds", (System.currentTimeMillis() - timestamp));
+		logger.info("Email was sent in: " + (System.currentTimeMillis() - timestamp) + " miliseconds");
 
 		return result;
 	}
@@ -67,13 +62,6 @@ public class MainAspect {
 		String method = jointPoint.getSignature().toShortString();
 		logger.info("Executing @AfterThrowing advice on method: " + method);
 		logger.log(Level.SEVERE, excep, () -> "Captcha was not verify correctly: " + excep.getMessage());
-	}
-
-	@AfterReturning(pointcut = "forServiceMatchReCaptcha()", returning = "result")
-	public void matchReCaptcha(JoinPoint joinPoint, Object result) {
-		String method = joinPoint.getSignature().toShortString();
-		logger.info("Executing @AfterReturning advice on method: " + method);
-		logger.log(Level.INFO, "ReCaptcha response form user match with pattern: {}", result);
 	}
 
 }
